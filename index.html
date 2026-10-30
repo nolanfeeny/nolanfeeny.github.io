@@ -1,278 +1,392 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>Nolan Feeny</title>
-    <meta name="description" content="">
-    <meta name="author" content="nolanfeeny">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nolan Feeny | University of Michigan</title>
+<meta name="description" content="Nolan Feeny, Ph.D. student in Industrial & Operations Engineering at the University of Michigan. Risk analysis, simulation, and machine learning for supply chains and infrastructure resilience.">
+<meta name="author" content="Nolan Feeny">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='8' cy='22' r='4' fill='%232f6f62'/><circle cx='24' cy='10' r='4' fill='%231d2b3a'/><line x1='8' y1='22' x2='24' y2='10' stroke='%232f6f62' stroke-width='2'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f6f7f4;
+    --panel: #eceee9;
+    --ink: #1d2b3a;
+    --muted: #5b6670;
+    --rule: #d6dad3;
+    --accent: #2f6f62;
+    --serif: "Newsreader", Georgia, "Times New Roman", serif;
+    --sans: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #141a20;
+      --panel: #1b232b;
+      --ink: #e4e8ea;
+      --muted: #9aa5ad;
+      --rule: #2e3a44;
+      --accent: #7cc0ad;
+      color-scheme: dark;
+    }
+  }
 
-    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
-    <!--[if lt IE 9]>
-    <script src="./theme/html5.js"></script>
-    <![endif]-->
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
-    <!-- Le styles -->
-    <link href="./theme/bootstrap.min.css" rel="stylesheet">
-    <link href="./theme/bootstrap.min.responsive.css" rel="stylesheet">
-    <link href="./theme/local.css" rel="stylesheet">
-    <link href="./theme/pygments.css" rel="stylesheet">
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: 1.125rem;
+    line-height: 1.6;
+    font-optical-sizing: auto;
+  }
 
-    <!-- So Firefox can bookmark->"abo this site" -->
+  a { color: var(--accent); text-underline-offset: 0.18em; text-decoration-thickness: 1px; }
+  a:hover { text-decoration-thickness: 2px; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
 
+  .layout {
+    display: grid;
+    grid-template-columns: 19rem minmax(0, 1fr);
+    max-width: 72rem;
+    margin: 0 auto;
+    min-height: 100vh;
+  }
+
+  /* Sidebar */
+  .side {
+    background: var(--panel);
+    padding: 2.5rem 2rem;
+    border-right: 1px solid var(--rule);
+  }
+  .side-inner { position: sticky; top: 2.5rem; }
+
+  .network { display: block; width: 100%; height: auto; margin-bottom: 1.5rem; }
+  .network line { stroke: var(--rule); stroke-width: 1.25; }
+  .network line.path { stroke: var(--accent); stroke-width: 2; }
+  .network circle { fill: var(--paper); stroke: var(--muted); stroke-width: 1.25; }
+  .network circle.on { fill: var(--accent); stroke: var(--accent); }
+
+  .photo {
+    width: 7.5rem; height: 7.5rem;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    margin-bottom: 1.25rem;
+    border: 3px solid var(--paper);
+    background: var(--rule);
+  }
+
+  h1 {
+    font-weight: 500;
+    font-size: 2.25rem;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    margin: 0 0 0.5rem;
+  }
+  .role { font-family: var(--sans); font-size: 0.95rem; line-height: 1.45; color: var(--muted); margin: 0 0 1.5rem; }
+
+  .side nav ul, .links { list-style: none; padding: 0; margin: 0; }
+  .side nav { font-family: var(--sans); font-size: 0.95rem; margin-bottom: 1.75rem; }
+  .side nav li { border-top: 1px solid var(--rule); }
+  .side nav li:last-child { border-bottom: 1px solid var(--rule); }
+  .side nav a { display: block; padding: 0.4rem 0; color: var(--ink); text-decoration: none; }
+  .side nav a:hover { color: var(--accent); }
+
+  .links { font-family: var(--sans); font-size: 0.9rem; display: flex; flex-wrap: wrap; gap: 0.35rem 1rem; }
+  .cv-btn {
+    display: inline-block;
+    margin-top: 1.25rem;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 0.55rem 1rem;
+    border: 1.5px solid var(--accent);
+    border-radius: 3px;
+    color: var(--accent);
+    text-decoration: none;
+  }
+  .cv-btn:hover { background: var(--accent); color: var(--paper); }
+
+  /* Main */
+  main { padding: 3rem clamp(1.5rem, 5vw, 4.5rem) 4rem; max-width: 46rem; }
+
+  section { padding-top: 0.5rem; margin-bottom: 3.25rem; scroll-margin-top: 1.5rem; }
+  h2 {
+    font-weight: 500;
+    font-size: 1.6rem;
+    line-height: 1.2;
+    margin: 0 0 1.25rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--ink);
+  }
+  h3 {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--muted);
+    margin: 1.75rem 0 0.75rem;
+  }
+
+  .lede { font-size: 1.3rem; line-height: 1.5; margin-top: 0; }
+  .note {
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    border-left: 3px solid var(--accent);
+    padding: 0.4rem 0 0.4rem 1rem;
+    margin: 1.5rem 0 0;
+  }
+
+  .interests { display: grid; grid-template-columns: 7rem 1fr; gap: 0.5rem 1.25rem; margin: 0; }
+  .interests dt { font-family: var(--sans); font-size: 0.9rem; color: var(--muted); padding-top: 0.2rem; }
+  .interests dd { margin: 0; }
+
+  /* Publications */
+  .pubs { list-style: none; padding: 0; margin: 0; }
+  .pubs li { margin-bottom: 1.25rem; }
+  .pub-title { display: block; font-weight: 500; }
+  .pub-authors { display: block; color: var(--muted); font-size: 1rem; }
+  .pub-authors b { color: var(--ink); font-weight: 600; }
+  .pub-venue { display: block; font-size: 1rem; font-style: italic; }
+
+  /* Dated lists */
+  .dated { list-style: none; padding: 0; margin: 0; }
+  .dated li {
+    display: grid;
+    grid-template-columns: 8.5rem 1fr;
+    gap: 1.25rem;
+    padding: 0.45rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .dated li:first-child { border-top: 1px solid var(--rule); }
+  .when { font-family: var(--sans); font-size: 0.9rem; color: var(--muted); font-variant-numeric: tabular-nums; padding-top: 0.15rem; }
+  .what small { display: block; color: var(--muted); font-size: 0.95rem; }
+
+  .job { margin-bottom: 1.5rem; }
+  .job-head { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; align-items: baseline; }
+  .job-head strong { font-weight: 600; }
+  .job p { margin: 0.25rem 0 0; font-size: 1.05rem; }
+
+  footer {
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    color: var(--muted);
+    border-top: 1px solid var(--rule);
+    padding-top: 1.25rem;
+  }
+
+  @media (max-width: 52rem) {
+    .layout { grid-template-columns: 1fr; }
+    .side { border-right: none; border-bottom: 1px solid var(--rule); padding: 2rem 1.5rem; }
+    .side-inner { position: static; }
+    .network { max-width: 18rem; }
+    .side nav ul { display: flex; flex-wrap: wrap; gap: 0 1.25rem; }
+    .side nav li, .side nav li:last-child { border: none; }
+    main { padding-top: 2rem; }
+  }
+  @media (max-width: 30rem) {
+    .dated li { grid-template-columns: 1fr; gap: 0; }
+    .interests { grid-template-columns: 1fr; }
+  }
+</style>
 </head>
-
 <body>
+<div class="layout">
 
-<div class="navbar">
-    <div class="navbar-inner">
-    <div class="container">
+  <aside class="side">
+    <div class="side-inner">
+      <!-- Small network motif: a supply chain / infrastructure graph with one highlighted route -->
+      <svg class="network" viewBox="0 0 240 90" role="img" aria-label="Decorative network diagram">
+        <line x1="14" y1="62" x2="58" y2="28"/>
+        <line x1="14" y1="62" x2="70" y2="72"/>
+        <line x1="58" y1="28" x2="112" y2="44" class="path"/>
+        <line x1="14" y1="62" x2="58" y2="28" class="path"/>
+        <line x1="70" y1="72" x2="112" y2="44"/>
+        <line x1="112" y1="44" x2="160" y2="18" class="path"/>
+        <line x1="112" y1="44" x2="168" y2="70"/>
+        <line x1="160" y1="18" x2="226" y2="38" class="path"/>
+        <line x1="168" y1="70" x2="226" y2="38"/>
+        <line x1="160" y1="18" x2="168" y2="70"/>
+        <circle cx="14" cy="62" r="5" class="on"/>
+        <circle cx="58" cy="28" r="4"/>
+        <circle cx="70" cy="72" r="4"/>
+        <circle cx="112" cy="44" r="5"/>
+        <circle cx="160" cy="18" r="4"/>
+        <circle cx="168" cy="70" r="4"/>
+        <circle cx="226" cy="38" r="5" class="on"/>
+      </svg>
 
-         <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-             <span class="icon-bar"></span>
-             <span class="icon-bar"></span>
-             <span class="icon-bar"></span>
-         </a>
+      <img class="photo" src="images/Feeny_Nolan.JPG" alt="Nolan Feeny">
 
-        <a class="brand" href=".">Nolan Feeny</a>
+      <h1>Nolan Feeny</h1>
+      <p class="role">Ph.D. student, Industrial &amp; Operations Engineering<br>University of Michigan</p>
 
-        <div class="nav-collapse">
-        <ul class="nav">
-            <li><a href="https://nolanfeeny.github.io/category/blog.html">Blog</a></li>
-            
-            <li><a href="./pages/about.html">About</a></li>
-            <li><a href="./pages/contact.html">Contact</a></li>
+      <nav aria-label="Sections">
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#research">Research</a></li>
+          <li><a href="#teaching">Teaching</a></li>
+          <li><a href="#talks">Conferences</a></li>
+          <li><a href="#experience">Industry</a></li>
+          <li><a href="#service">Service &amp; awards</a></li>
         </ul>
-        </div>
-        
+      </nav>
+
+      <ul class="links">
+        <li><a href="mailto:feenyno@umich.edu">feenyno@umich.edu</a></li>
+        <li><a href="https://scholar.google.com/citations?hl=en&view_op=list_works&gmla=AN_4Zu9Q1-zMg3UEGCYrxjU1nFxwdIqRyiCl1PgRscbaD_lZ9c0TLSDYR32u3oeRaRnCMXuXyi-XpUcOcsbHMw&user=YEiXOZcAAAAJ">Google Scholar</a></li>
+        <li><a href="https://github.com/nolanfeeny">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/nolanfeeny/">LinkedIn</a></li>
+      </ul>
+
+      <a class="cv-btn" href="Feeny_Nolan_CV.pdf">Download CV (PDF)</a>
     </div>
-    </div>
+  </aside>
+
+  <main>
+
+    <section id="about">
+      <h2>About</h2>
+      <p class="lede">I study how risk spreads through the systems people depend on: supply chains, communication networks, and other infrastructure, and how to make them more resilient.</p>
+      <p>I’m a Ph.D. student in Industrial &amp; Operations Engineering at the University of Michigan, where I also earned my B.S.E. and M.S.E. My work combines risk analysis, simulation, game theory, machine learning, and optimization, often built on publicly available and location-based data. Recent projects estimate cellular coverage during natural hazards, reconstruct retail supply chain networks from location data, and examine how the IPCC communicates uncertainty.</p>
+      <p>Before my Ph.D., I spent two years at Epic Systems as a Technical Solutions Engineer, working with hospital and clinic teams through go-lives. I teach regularly, including as primary instructor for Engineering Economics, and I designed a course on AI and the future of work.</p>
+      <!-- Optional: remove this line if you'd rather not advertise it -->
+      <p class="note">I’m on the 2026–27 academic job market and expect to complete my Ph.D. in 2027.</p>
+    </section>
+
+    <section id="research">
+      <h2>Research</h2>
+
+      <dl class="interests">
+        <dt>Methods</dt>
+        <dd>Risk analysis, simulation, game theory, machine learning, optimization</dd>
+        <dt>Applications</dt>
+        <dd>Supply chains, infrastructure systems, sustainability, resilience, ethics</dd>
+      </dl>
+
+      <h3>Journal papers</h3>
+      <ol class="pubs" reversed>
+        <li>
+          <span class="pub-title">A quantitative spatial approach to estimate cellular network coverage during natural hazards using publicly available data</span>
+          <span class="pub-authors"><b>N. Feeny</b>, A. White, and S. Guikema</span>
+          <span class="pub-venue">Journal of Infrastructure Preservation and Resilience, 7(1), 14, 2026</span>
+        </li>
+        <li>
+          <span class="pub-title">Collective action vs. individual action and a discussion of the ethics of using large language models in research</span>
+          <span class="pub-authors"><b>N. Feeny</b>, R. Flage, and S. Guikema</span>
+          <span class="pub-venue">Risk Analysis, 2026</span>
+        </li>
+      </ol>
+
+      <h3>Working papers</h3>
+      <ul class="pubs">
+        <li>
+          <span class="pub-title">Improving synthetic supply chain network generation techniques</span>
+          <span class="pub-authors"><b>N. Feeny</b> and S. Guikema</span>
+          <span class="pub-venue">Target: International Journal of Production Research</span>
+        </li>
+        <li>
+          <span class="pub-title">What can location-based services data reveal about supply chain networks? An ALDI case study</span>
+          <span class="pub-authors"><b>N. Feeny</b> and S. Guikema</span>
+          <span class="pub-venue">Target: International Journal of Production Research</span>
+        </li>
+        <li>
+          <span class="pub-title">Improving how the IPCC addresses uncertainty through knowledge decomposition</span>
+          <span class="pub-authors">C. Doehring, <b>N. Feeny</b>, Z. Cajigas, M. Zheng, and S. Guikema</span>
+          <span class="pub-venue">Target: npj Climate Action</span>
+        </li>
+      </ul>
+    </section>
+
+    <section id="teaching">
+      <h2>Teaching</h2>
+      <h3>Instructor and course design</h3>
+      <ul class="dated">
+        <li><span class="when">Fall 2026</span><span class="what">Primary Instructor, Engineering Economics (IOE 201)</span></li>
+        <li><span class="when">Summer 2026</span><span class="what">Course Designer, AI: The Future of Work (IOE 491)</span></li>
+        <li><span class="when">Winter 2026</span><span class="what">Graduate Student Instructor, Risk Analysis (IOE 561)<small>Department nominee, University Outstanding GSI Award</small></span></li>
+        <li><span class="when">Fall 2025</span><span class="what">Graduate Student Instructor, Derivative Instruments (IOE 453)</span></li>
+        <li><span class="when">Fall 2024</span><span class="what">Graduate Student Instructor, Game Theory (IOE 517)</span></li>
+        <li><span class="when">Fall 2020</span><span class="what">Graduate Student Instructor, Design Your Engineering Experience (ENGR 110)</span></li>
+      </ul>
+      <h3>Guest lectures</h3>
+      <ul class="dated">
+        <li><span class="when">Oct 2026</span><span class="what">Ph.D. Seminar (IOE 802)</span></li>
+        <li><span class="when">Sep 2026</span><span class="what">AI: The Future of Work (IOE 491)</span></li>
+        <li><span class="when">Oct 2025</span><span class="what">Ph.D. Seminar (IOE 802)</span></li>
+        <li><span class="when">Feb 2025</span><span class="what">Risk Analysis (IOE 561)</span></li>
+        <li><span class="when">Nov 2023</span><span class="what">Simulation (IOE 574)</span></li>
+      </ul>
+    </section>
+
+    <section id="talks">
+      <h2>Conferences</h2>
+      <ul class="dated">
+        <li><span class="when">Dec 2026</span><span class="what">Society for Risk Analysis, Atlanta</span></li>
+        <li><span class="when">Nov 2026</span><span class="what">INFORMS Annual Meeting, San Francisco</span></li>
+        <li><span class="when">Jan 2026</span><span class="what">Allied Social Science Associations, Philadelphia</span></li>
+        <li><span class="when">Dec 2025</span><span class="what">Society for Risk Analysis, Washington, DC</span></li>
+        <li><span class="when">Oct 2025</span><span class="what">IOE 70th Anniversary Symposium, Ann Arbor</span></li>
+        <li><span class="when">Jun 2025</span><span class="what">ESREL and SRA Europe, Norway</span></li>
+        <li><span class="when">Mar 2025</span><span class="what">Michigan Student Symposium for Interdisciplinary Statistical Sciences, Ann Arbor</span></li>
+        <li><span class="when">Oct 2024</span><span class="what">INFORMS Annual Meeting, Seattle</span></li>
+        <li><span class="when">Dec 2019</span><span class="what">Society for Risk Analysis, Washington, DC<small>Best Poster Award</small></span></li>
+      </ul>
+    </section>
+
+    <section id="experience">
+      <h2>Industry experience</h2>
+      <div class="job">
+        <div class="job-head"><strong>Epic Systems, Technical Solutions Engineer</strong><span class="when">2021–2023</span></div>
+        <p>Managed projects from high-level operations to technical system details with nurses, analysts, directors, and executives; trained hospital and clinic staff onsite during go-lives.</p>
+      </div>
+      <div class="job">
+        <div class="job-head"><strong>Stoneridge Inc., Tauber Global Operations Intern</strong><span class="when">Summer 2020</span></div>
+        <p>Forecasted pandemic demand scenarios and used ProModel simulation to recommend capacity changes projected to raise inventory turns by 280%.</p>
+      </div>
+      <div class="job">
+        <div class="job-head"><strong>Dow Chemical, Supply Chain Intern</strong><span class="when">Summer 2019</span></div>
+        <p>Valued a potential new truck center and analyzed shutdown and emissions data to identify $14M in cost-reducing measures.</p>
+      </div>
+    </section>
+
+    <section id="service">
+      <h2>Service &amp; awards</h2>
+      <h3>Awards and fellowships</h3>
+      <ul class="dated">
+        <li><span class="when">2026</span><span class="what">SRA Travel Award</span></li>
+        <li><span class="when">Apr 2026</span><span class="what">Department Nominee, University Outstanding Graduate Student Instructor</span></li>
+        <li><span class="when">2025–2026</span><span class="what">Summa Cum Laude INFORMS Award</span></li>
+        <li><span class="when">2024–2026</span><span class="what">Rackham Travel Grant</span></li>
+        <li><span class="when">Oct 2024</span><span class="what">ADGPE Community Grant</span></li>
+        <li><span class="when">Aug 2024</span><span class="what">Departmental Bonder Fellowship</span></li>
+        <li><span class="when">Dec 2019</span><span class="what">Best Poster Award, Society for Risk Analysis</span></li>
+      </ul>
+      <h3>Selected service</h3>
+      <ul class="dated">
+        <li><span class="when">2025–2027</span><span class="what">Engineering Teaching Consultant</span></li>
+        <li><span class="when">2025–2026</span><span class="what">INFORMS University of Michigan Chapter, President (2026) and Vice President (2025)</span></li>
+        <li><span class="when">2024–2026</span><span class="what">IOE Student Leadership Board, Co-President</span></li>
+        <li><span class="when">2024, 2026</span><span class="what">Summer Research Mentor</span></li>
+        <li><span class="when">2026</span><span class="what">Judge, IOE Undergraduate Research Symposium and Rising Stars Workshop</span></li>
+        <li><span class="when">2023–present</span><span class="what">Mentor, Graduate Application Mentoring Program</span></li>
+      </ul>
+      <p>The <a href="Feeny_Nolan_CV.pdf">full CV</a> lists all service activities.</p>
+    </section>
+
+    <footer>
+      <p>Outside research: Eagle Scout, marathon finisher, and concert cellist and pianist. I also make music and film and spend as much time outdoors as I can.</p>
+      <p>&copy; 2026 Nolan Feeny</p>
+    </footer>
+
+  </main>
 </div>
-
-<div class="container">
-    <div class="content">
-    <div class="row">
-
-        <div class="span9">
-        
-
-        
-
-
-    <div class='article'>
-        <div class="content-title">
-            <a href="./about.html"><h1>About</h1></a>
-Sun 10 November 2019
-
-by <a class="url fn" href="./author/nolanfeeny.html">nolanfeeny</a>
- 
-
-
- 
-        </div>
-        
-        <div><p><img alt="Nolan" src="./images/aboutpic.jpg" width="450"></p>
-<p>Nolan Feeny grew up in Okemos, MI and has lived there his whole life until moving to Ann Arbor for school in the fall of 2016. In his free time, Nolan enjoys being outside in nature, playing sports, and immersing himself in music.</p>
-<p>Nolan is a senior studying Industrial &amp; Operations Engineering at the University of Michigan. On campus, he has been an executive board member of <a href="https://meccconsulting.com">MECC Consulting Group</a>, principal cellist for the Campus Symphony Orchestra, and an admit to the Tauber Institute of Global Operations through the Engineering Global Leadership honors program. Before graduating from Okemos High School in 2016, he won multiple state-wide music awards and featured in the OHS Earth Club's first '<a href="https://www.youtube.com/watch?v=zy37P91NTDo">Green Tip of the Week</a>'.</p>
-<p>Pursuing a career in consulting or academia, he wants to use his life integrating engineering, tech, and business skills to maximize the amount of good in the world - through improving sustainability and social practices on a global scale.</p></div>
-        <hr />
-    </div>
-		
-
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="./contact.html"><h2>Contact</h2></a>
-        <div class= "well small"> Sun 10 November 2019
-
-by <a class="url fn" href="./author/nolanfeeny.html">nolanfeeny</a>
- 
-
-
- </div>
-        <div class="summary"><p><img alt="headshot" src="./images/Feeny_Nolan.JPG" width="280"></p>
-<p>Contact info:<br>
-<a href="https://www.linkedin.com/in/nolan-feeny-375893132/">LinkedIn</a><br>
- <a href="../images/Feeny_Nolan_Resume.pdf" target="_blank">Resume</a></p>
-<p>Nolan Feeny<br>
-B.S.E. Industrial &amp; Operations Engineering, University of Michigan 2020<br>
-External Vice President, MECC Consulting Group<br>
-Tauber Institute for Global Operations 
-feenyno@umich.edu</p> <a class="btn btn-info xsmall" href="./contact.html">read more</a></div>
-    </div>	
-				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="./week-4.html"><h2>Week 4</h2></a>
-        <div class= "well small"> Sun 05 August 2018
-
-by <a class="url fn" href="./author/nolanfeeny.html">nolanfeeny</a>
- 
-
-
- </div>
-        <div class="summary"><h1>Berlin</h1>
-<p>The only thing we’ve done in Berlin this week is have a lot of class. Basically the goal by the end of the “semester” is to take given data from Traverse City regarding sun and wind speeds, and to model how to best implement a renewable energy system …</p> <a class="btn btn-info xsmall" href="./week-4.html">read more</a></div>
-    </div>	
-				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="./week-3.html"><h2>Week 3</h2></a>
-        <div class= "well small"> Mon 30 July 2018
-
-by <a class="url fn" href="./author/nolanfeeny.html">nolanfeeny</a>
- 
-
-
- </div>
-        <div class="summary"><p>Limited traveling this week. Stayed in Berlin for the weekend, which gave me a chance to learn more about culture and way of life in the city.</p>
-<p><img alt="olympic pool" src="./images/IMG_2852.jpg"></p>
-<p>Olympic Stadium pool: So cool. I didn’t know the architecture was designed by Nazis, but it was indeed intimidating. Shout out Jesse …</p> <a class="btn btn-info xsmall" href="./week-3.html">read more</a></div>
-    </div>	
-				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="./week-2.html"><h2>Week 2</h2></a>
-        <div class= "well small"> Mon 23 July 2018
-
-by <a class="url fn" href="./author/nolanfeeny.html">nolanfeeny</a>
- 
-
-
- </div>
-        <div class="summary"><p>Not much happened in Berlin this week, but this weekend I went to a pretty cool city. I’ll talk about it.</p>
-<h1>AMSTERDAM</h1>
-<p><img alt="painting" src="./images/am_painting.jpg"></p>
-<p>Amsterdam was probably the coolest city I’ve been to in my life. The train ride into the main city was nothing special. Then I walked out …</p> <a class="btn btn-info xsmall" href="./week-2.html">read more</a></div>
-    </div>	
-				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="./week-1.html"><h2>Week 1</h2></a>
-        <div class= "well small"> Mon 16 July 2018
-
-by <a class="url fn" href="./author/nolanfeeny.html">nolanfeeny</a>
- 
-
-
- </div>
-        <div class="summary"><h1>Iceland</h1>
-<p><img alt="Harbor" src="./images/harbor.jpg"></p>
-<p>On my way to Berlin, I had a 19 hour layover in Iceland from July 5-6. Coincidentally, my uncle and two of his friends were also in Iceland during my time, so they were able to show me around Reykjavik. I arrived at around 11 am - most of my …</p> <a class="btn btn-info xsmall" href="./week-1.html">read more</a></div>
-    </div>	
-				
-
- 
-        
-
- 
-
-    <div class='article'>
-        <a href="./pre-study-abroad.html"><h2>Pre Study Abroad</h2></a>
-        <div class= "well small"> Tue 29 May 2018
-
-by <a class="url fn" href="./author/nolanfeeny.html">nolanfeeny</a>
- 
-
-
- </div>
-        <div class="summary"><p>The reason I made this blog is because I'm going to be leaving the U.S. to study abroad in Berlin, Germany from July 7 - August 18. Since I won't have regular access to my phone, I'm not sure how accessible I'll be. Facebook isn't usually where I want to …</p> <a class="btn btn-info xsmall" href="./pre-study-abroad.html">read more</a></div>
-    </div>	
-				
-<div class="pagination">
-<ul>
-    <li class="prev disabled"><a href="#">&larr; Previous</a></li>
-
-    <li class="active"><a href="./index.html">1</a></li>
-
-    <li class="next disabled"><a href="#">&rarr; Next</a></li>
-
-</ul>
-</div>
- 
-  
-        </div>
-        
-        <div class="span3">
-
-            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
-            <ul class="nav nav-list">
-                <li class="nav-header"> 
-                Site
-                </li>
-            
-                <li><a href="./archives.html">Archives</a>
-                <li><a href="./tags.html">Tags</a>
-
-
-
-
-            </ul>
-            </div>
-
-
-            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
-            <ul class="nav nav-list">
-                <li class="nav-header"> 
-                Categories
-                </li>
-                
-                <li><a href="./category/blog.html">Blog</a></li>
-                <li><a href="./category/pages.html">Pages</a></li>
-                   
-            </ul>
-            </div>
-
-
-
-
-            <div class="social">
-            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
-            <ul class="nav nav-list">
-                <li class="nav-header"> 
-                Social
-                </li>
-           
-                <li><a href="https://www.linkedin.com/in/nolanfeeny/">LinkedIn</a></li>
-                <li><a href="https://www.github.com/nolanfeeny">Github</a></li>
-                <li><a href="https://soundcloud.com/nolanfeeny">SoundCloud</a></li>
-            </ul>
-            </div>
-            </div>
-
-        </div>  
-    </div>     </div> 
-<footer>
-<br />
-<p><a href=".">Nolan Feeny</a> &copy; nolanfeeny 2019</p>
-</footer>
-
-</div> <!-- /container -->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script src="./theme/bootstrap-collapse.js"></script>
- 
 </body>
 </html>
